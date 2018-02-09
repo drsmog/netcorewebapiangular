@@ -31,6 +31,7 @@ namespace netcorewebapiangular
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +45,10 @@ namespace netcorewebapiangular
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("chat");
+            });
         }
     }
 }
